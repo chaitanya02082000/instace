@@ -6,8 +6,8 @@ import { Card } from "./components/card";
 
 const MainApplayout=()=>{
     return(<>
-        <Header/>
-        <Card/>
+      <Header/>
+        <div className="center">  <Card/></div>
 </>
     )
 }
