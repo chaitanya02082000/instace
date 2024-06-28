@@ -1,15 +1,22 @@
-/* *{
-  p
-} */
-
-
-.header-container{
-    display: flex;
+ .page-header{
+  position: fixed;
+    /* display: flex;
     justify-content: center;
     flex-wrap: wrap;
- /* margin:10px; */
-   justify-content: space-between;
+   justify-content: space-between; */
    background-color: gray;
+   top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  z-index: 1000;
+ }
+
+.header-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
 }
    
 .header-container>logo{
@@ -33,19 +40,24 @@
  .card-container{
     width: 100%;
   max-width: 600px;
-  border: 1px solid #dbdbdb;
-  border-radius: 3px;
+  border: 1px solid black;
+  box-shadow: 10px;
+  border-radius: 10px;
  margin:10px;
- 
+ position: relative;
   margin-bottom: 60px;
-   
+  z-index: 1;
  }
 .card-container>.card-header{
 display: flex;
   align-items: center;
   padding: 16px;
-background-color: black ;
-color:white;
+/* background-color: black ; */
+/* color:white; */
+
+}
+body {
+  padding-top: 70px; /* This should match your header height */
 }
 .card-container>.image{
   width: 100%;
@@ -62,7 +74,7 @@ color:white;
 
 
 .card-container>.image>img{
-  position: absolute;
+  position:absolute; 
   top: 0;
   left: 0;
   width: 100%;
@@ -72,7 +84,7 @@ color:white;
    
 .card-container >.card-footer{
     display:flex ;
-background-color: black ;
-color:white;
+/* background-color: black ; */
+/* color:white; */
 padding:10px;
 }

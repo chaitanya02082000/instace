@@ -6,6 +6,7 @@ export const Header=()=>{
     
 
     return(<>
+   <div className="page-header"> 
     <div className="header-container">
         <div className="logo">Spacetagram</div>
         <div className="button"><ul>
@@ -13,6 +14,6 @@ export const Header=()=>{
             <li><button>Switch</button></li>
             <li>github</li></ul></div>
     </div>
-    
+    </div>
     </>)
 }

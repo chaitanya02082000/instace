@@ -8,6 +8,8 @@ const MainApplayout=()=>{
     return(<>
       <Header/>
         <div className="center">  <Card/></div>
+
+  <div className="center">  <Card/></div>
 </>
     )
 }
