@@ -1,3 +1,7 @@
+ @import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+ 
+ 
+ 
  .page-header{
   position: fixed;
     /* display: flex;
@@ -19,9 +23,12 @@
 
 }
    
-.header-container>logo{
+.header-container>.logo{
 	justify-content:center;	
-
+font-family: "Cookie", cursive;
+font-weight: 500;
+  font-style: normal;
+  font-size: 50px;
 
 }
 .header-container>.button>ul{
