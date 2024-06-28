@@ -10,7 +10,11 @@
    background-color: gray;
 }
    
+.header-container>logo{
+	justify-content:center;	
 
+
+}
 .header-container>.button>ul{
     display: flex;
     cursor: pointer;
