@@ -1,15 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Header } from "./components/header";
-import { Card } from "./components/card";
+import {Cardcon} from "./components/card";
 
 
 const MainApplayout=()=>{
     return(<>
       <Header/>
-        <div className="center">  <Card/></div>
+        <div className="center"> <Cardcon/></div>
 
-  <div className="center">  <Card/></div>
+  {/* <div className="center">  <Cardcon/></div> */}
 </>
     )
 }

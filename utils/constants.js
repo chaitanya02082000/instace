@@ -1,0 +1,1 @@
+export const api="https://api.nasa.gov/planetary/apod?api_key=KUKIc9kkRALjcuzMs3xLM6SYBo2hNUDu5UfpIAbe&count=5"
