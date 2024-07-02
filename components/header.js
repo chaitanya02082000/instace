@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client"
 import {useRouter} from "react-router"
-
+import ExploreIcon from '@mui/icons-material/Explore';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import GitHubIcon from '@mui/icons-material/GitHub';
   // import ExploreIcon from '@mui/icons-material/Explore';ExploreIcon,
   
 
@@ -14,9 +16,9 @@ export const Header=()=>{
     <div className="header-container">
         <div className="logo">Spacetagram</div>
         <div className="button"><ul>
-            <li>Explore</li>
-            <li><button>Switch</button></li>
-            <li>github</li></ul></div>
+            <li><ExploreIcon/></li>
+            <li><DarkModeIcon/></li>
+            <li><GitHubIcon/></li></ul></div>
     </div>
     </div>
     </>)

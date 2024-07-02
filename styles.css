@@ -20,6 +20,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 
 }
    
@@ -48,8 +51,8 @@ font-weight: 500;
     width: 100%;
   max-width: 600px;
   border: 1px solid black;
-  box-shadow: 10px;
-  border-radius: 10px;
+  box-shadow: 20px;
+  border-radius: 20px;
  margin:10px;
  position: relative;
   margin-bottom: 60px;
@@ -91,12 +94,26 @@ body {
    
 .card-container >.card-footer{
     display:flex ;
+    flex-direction: column;
 /* background-color: black ; */
 /* color:white; */
 padding:10px;
 }
 
+.footer-btn{
+display: flex;
+margin-left :0 auto;
+}
+.footer-btn>div{
+  padding:4px;
+  margin:0 ;
+  margin-bottom: 0 auto;
+}
 
+.date{
+  font-size: small;
+  font-weight:bolder;
+}
 /*  Skeleton Cssss */
 .skeleton-container{
   width: 100%;
@@ -146,4 +163,13 @@ padding: 16px;
 /* color:white; */
 padding:10px;
 }
-
+.btn{
+  border:none;
+  background:none;
+  padding:0;
+  cursor:pointer;
+  color:grey;
+}
+.btn:hover{
+  color:black;
+}

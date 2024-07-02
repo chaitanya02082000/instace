@@ -3,8 +3,23 @@ import ReactDOM from "react-dom/client"
 import { useEffect,useState } from "react";
 import {api} from "../utils/constants"
  import Skeleton from "./skeleton";
+ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+ import FavoriteIcon from '@mui/icons-material/Favorite';
+ import ShareIcon from '@mui/icons-material/Share';
 
-export const Cardcon = () => {
+ const Datene=(props)=>{
+  const date= props;
+  const givenDate= new Date(date);
+  const formattedDate = `${givenDate.getMonth() + 1}/${givenDate.getDate()}/${givenDate.getFullYear()}`;
+ return (
+    <div>
+      <p>{formattedDate}</p>
+    </div>
+  );
+
+}
+
+ export const Cardcon = () => {
   const [cards, setCards] = useState([]);
 const [isLoading,setIsLoading]=useState(true)
   
@@ -24,23 +39,19 @@ const [isLoading,setIsLoading]=useState(true)
       setIsLoading(false);
     }
   };
-  // return (
-  //   <div className="cards-wrapper">
-  //     {isLoading
-  //       ? Array(5).fill().map((_, index) => <Skeleton key={index} />)
-  //       : cards.map((card, index) => (
-  //           <Card key={index} cardData={card} />
-  //         ))}
-  //   </div>
-  // );
-
-  return (cards.map((card, index) => (
-    <Card key={index} cardData={card} />
-  )))
+  return (
+    <div className="cards-wrapper">
+      {isLoading
+        ? Array(5).fill().map((_, index) => <Skeleton key={index} />)
+        : cards.map((card, index) => (
+            <Card key={index} cardData={card} />
+          ))}
+    </div>
+  );
 };
-
+ 
 const Card = ({ cardData }) => {
-  const { title, url, explanation } = cardData;
+  const { title, url, explanation,date } = cardData;
 
   const [isExpanded, setIsExpanded] = useState(false);
   const wordLimit = 30;
@@ -57,17 +68,22 @@ const Card = ({ cardData }) => {
         <img alt="NASA APOD" src={url} />
       </div>
       <div className="card-footer">
+        <div className="footer-btn">
+          <div className="like"><FavoriteBorderOutlinedIcon/></div>
+          <div className="share"><ShareIcon/></div>
+        </div>
         {isExpanded ? explanation : (
           <>
             {truncatedText}
             {isTextLong && (
               <>
                 ...
-                <button className="btn" onClick={handleReadMore}>Read More</button>
+                <button className="btn" onClick={handleReadMore}>More</button>
               </>
             )}
           </>
         )}
+        <div className="date"><Datene props={date}/></div>
       </div>
     </div>
   );
