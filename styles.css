@@ -1,19 +1,24 @@
  @import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
  
  
- 
+  
  .page-header{
   position: fixed;
     /* display: flex;
     justify-content: center;
     flex-wrap: wrap;
    justify-content: space-between; */
-   background-color: gray;
+   background-color: lightgrey;
    top: 0;
   left: 0;
   right: 0;
   height: 70px;
   z-index: 1000;
+  border: #dddd;
+  
+
  }
 
 .header-container{
@@ -23,7 +28,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-
+ 
 }
    
 .header-container>.logo{
@@ -31,7 +36,7 @@
 font-family: "Cookie", cursive;
 font-weight: 500;
   font-style: normal;
-  font-size: 40px;
+  font-size: 50px;
 
 }
 .header-container>.button>ul{
@@ -40,6 +45,7 @@ font-weight: 500;
   list-style-type:none;
  
 }
+ 
 .header-container>.button>ul>li{
  padding:5px;
 }
@@ -50,10 +56,10 @@ font-weight: 500;
  .card-container{
     width: 100%;
   max-width: 600px;
-  border: 1px solid black;
+  border: 1px solid #ddd;
   box-shadow: 20px;
   border-radius: 20px;
- margin:10px;
+ margin:0 auto;
  position: relative;
   margin-bottom: 60px;
   z-index: 1;
@@ -64,7 +70,8 @@ display: flex;
   padding: 16px;
 /* background-color: black ; */
 /* color:white; */
-
+font-family: "Roboto", sans-serif;
+font-weight: 500;
 }
 body {
   padding-top: 70px; /* This should match your header height */
@@ -95,24 +102,35 @@ body {
 .card-container >.card-footer{
     display:flex ;
     flex-direction: column;
-/* background-color: black ; */
-/* color:white; */
-padding:10px;
+    justify-content: space-evenly;
+     
+    padding:10px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    
 }
 
 .footer-btn{
 display: flex;
 margin-left :0 auto;
+
+}
+.card-footer>.footer-text{
+  display: flex;
+  flex-direction: row;
+  padding: 0;
 }
 .footer-btn>div{
-  padding:4px;
+  padding:5px;
   margin:0 ;
   margin-bottom: 0 auto;
 }
 
 .date{
   font-size: small;
-  font-weight:bolder;
+  font-weight:light;
+  padding:10px;
 }
 /*  Skeleton Cssss */
 .skeleton-container{
@@ -122,6 +140,7 @@ border: 1px solid black;
 box-shadow: 10px;
 border-radius: 10px;
 margin:10px;
+background:#ddd;
 position: relative;
 margin-bottom: 60px;
 z-index: 1;
@@ -159,14 +178,12 @@ padding: 16px;
    
 .skeleton-container >.card-footer{
     display:flex ;
-/* background-color: black ; */
-/* color:white; */
 padding:10px;
 }
 .btn{
   border:none;
   background:none;
-  padding:0;
+  padding:10px;
   cursor:pointer;
   color:grey;
 }

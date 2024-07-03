@@ -7,17 +7,9 @@ import {api} from "../utils/constants"
  import FavoriteIcon from '@mui/icons-material/Favorite';
  import ShareIcon from '@mui/icons-material/Share';
 
- const Datene=(props)=>{
-  const date= props;
-  const givenDate= new Date(date);
-  const formattedDate = `${givenDate.getMonth() + 1}/${givenDate.getDate()}/${givenDate.getFullYear()}`;
- return (
-    <div>
-      <p>{formattedDate}</p>
-    </div>
-  );
+ 
 
-}
+
 
  export const Cardcon = () => {
   const [cards, setCards] = useState([]);
@@ -53,8 +45,18 @@ const [isLoading,setIsLoading]=useState(true)
 const Card = ({ cardData }) => {
   const { title, url, explanation,date } = cardData;
 
+
+  function formatDate(inputDate) {
+    const date = new Date(inputDate);
+    return new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }).format(date);
+  }
+
   const [isExpanded, setIsExpanded] = useState(false);
-  const wordLimit = 30;
+  const wordLimit = 15;
   const words = explanation.split(' ');
   const truncatedText = words.slice(0, wordLimit).join(' ');
   const isTextLong = words.length > wordLimit;
@@ -83,7 +85,7 @@ const Card = ({ cardData }) => {
             )}
           </>
         )}
-        <div className="date"><Datene props={date}/></div>
+        <div className="date"> {formatDate(date)} </div>
       </div>
     </div>
   );

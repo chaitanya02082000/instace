@@ -14,11 +14,11 @@ export const Header=()=>{
     return(<>
    <div className="page-header"> 
     <div className="header-container">
-        <div className="logo">Spacetagram</div>
+        <div className="logo">Instace</div>
         <div className="button"><ul>
-            <li><ExploreIcon/></li>
-            <li><DarkModeIcon/></li>
-            <li><GitHubIcon/></li></ul></div>
+            <li><ExploreIcon  sx={{ fontSize: 30 }}/></li>
+            <li><DarkModeIcon  sx={{ fontSize: 30 }}/></li>
+            <li><GitHubIcon  sx={{ fontSize: 30 }}/></li></ul></div>
     </div>
     </div>
     </>)
