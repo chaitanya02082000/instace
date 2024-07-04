@@ -14,7 +14,7 @@ export const Header=()=>{
     return(<>
    <div className="page-header"> 
     <div className="header-container">
-        <div className="logo">Instace</div>
+        <div className="logo"><Link to="/">Instace</Link></div>
         <div className="button"><ul>
             <li><ExploreIcon  sx={{ fontSize: 30 }}/></li>
             <li><DarkModeIcon  sx={{ fontSize: 30 }}/></li>
