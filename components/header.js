@@ -14,11 +14,11 @@ export const Header=()=>{
     return(<>
    <div className="page-header"> 
     <div className="header-container">
-        <div className="logo"><Link to="/">Instace</Link></div>
+        <div className="logo"><Link to="/"  >Instace</Link></div>
         <div className="button"><ul>
-            <li><ExploreIcon  sx={{ fontSize: 30 }}/></li>
+            <li><Link to="/explore"><ExploreIcon  sx={{ fontSize: 30 }}/></Link></li>
             <li><DarkModeIcon  sx={{ fontSize: 30 }}/></li>
-            <li><GitHubIcon  sx={{ fontSize: 30 }}/></li></ul></div>
+            <li><Link to="https://github.com/chaitanya02082000/instace" target="_blank"><GitHubIcon  sx={{ fontSize: 30 }}/></Link></li></ul></div>
     </div>
     </div>
     </>)

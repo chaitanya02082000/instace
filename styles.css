@@ -1,82 +1,89 @@
- @import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
- @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
- @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
- 
- 
-  
- .page-header{
+@import url("https://fonts.googleapis.com/css2?family=Cookie&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  background: #eee;
+  padding-top: 54px;
+}
+.page-header {
   position: fixed;
-    /* display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-   justify-content: space-between; */
-   background-color: lightgrey;
-   top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  top: 0;
   left: 0;
   right: 0;
-  height: 70px;
+  height: 54px;
   z-index: 1000;
-  border: #dddd;
+  border-bottom: 1px solid #dbdbdb;
   
+   
+}
 
- }
-
-.header-container{
+.header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
- 
 }
-   
-.header-container>.logo{
-	justify-content:center;	
-font-family: "Cookie", cursive;
-font-weight: 500;
+
+.header-container > .logo {
+  justify-content: center;
+  font-family: "Cookie", cursive;
+  font-weight: 500;
   font-style: normal;
   font-size: 50px;
+}
+.header-container > .button > ul {
+  display: flex;
+  cursor: pointer;
+  list-style-type: none;
+}
 
+.header-container > .button > ul > li {
+  padding: 5px;
 }
-.header-container>.button>ul{
-    display: flex;
-    cursor: pointer;
-  list-style-type:none;
- 
-}
- 
-.header-container>.button>ul>li{
- padding:5px;
-}
-.center{
+.center {
   justify-content: center;
   display: flex;
 }
- .card-container{
-    width: 100%;
+.card-container {
+  background: #fff;
+  width: 100%;
   max-width: 600px;
-  border: 1px solid #ddd;
+  border: 1px solid #f0e2e2dd;
+  border-width: 2px;
   box-shadow: 20px;
-  border-radius: 20px;
- margin:0 auto;
- position: relative;
+  border-radius: 10px;
+  margin: 0 auto;
+  position: relative;
   margin-bottom: 60px;
   z-index: 1;
- }
-.card-container>.card-header{
-display: flex;
+}
+.card-container > .card-header {
+  display: flex;
   align-items: center;
   padding: 16px;
-/* background-color: black ; */
-/* color:white; */
-font-family: "Roboto", sans-serif;
-font-weight: 500;
+  /* background-color: black ; */
+  /* color:white; */
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-size: large;
+  box-shadow: 10px;
+  
+  color: #4d4d4f;
 }
-body {
-  padding-top: 70px; /* This should match your header height */
-}
-.card-container>.image{
+ 
+.card-container > .image {
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -85,75 +92,86 @@ body {
   width: 100%;
   height: 0;
   padding-bottom: 100%; /* This creates a 1:1 aspect ratio */
-   position: relative; 
-  overflow: hidden; 
-   }
+  position: relative;
+  overflow: hidden;
+}
 
-
-.card-container>.image>img{
-  position:absolute; 
+.card-container > .image > img {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-   
-.card-container >.card-footer{
-    display:flex ;
-    flex-direction: column;
-    justify-content: space-evenly;
-     
-    padding:10px;
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
-    font-style: normal;
-    
-}
 
-.footer-btn{
-display: flex;
-margin-left :0 auto;
-
-}
-.card-footer>.footer-text{
+.card-container > .card-footer {
   display: flex;
-  flex-direction: row;
-  padding: 0;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  padding: 10px;
+  font-family: "Poppins", sans-serif;
+  font-weight: light;
+  font-style: normal;
+  font-size: small;
+  color: #262626;
 }
-.footer-btn>div{
-  padding:5px;
-  margin:0 ;
+.footer-text span {
+  display: inline; /* Ensure the ellipsis and text are inline */
+}
+
+.btn {
+  border: none;
+  background: none;
+  padding: 7px;
+  cursor: pointer;
+  color: grey;
+}
+
+.footer-btn {
+  display: flex;
+  margin-left: 0 auto;
+}
+.card-footer > .footer-text {
+  display: inline;
+  position: relative;
+  flex-wrap: nowrap;
+}
+
+.footer-btn > div {
+  padding: 5px;
+  margin: 0;
   margin-bottom: 0 auto;
 }
 
-.date{
+.date {
   font-size: small;
-  font-weight:light;
-  padding:10px;
+  font-weight: lighter;
+  padding: 10px;
+  color: #777;
 }
 /*  Skeleton Cssss */
-.skeleton-container{
+.skeleton-container {
   width: 100%;
-max-width: 600px;
-border: 1px solid black;
-box-shadow: 10px;
-border-radius: 10px;
-margin:10px;
-background:#ddd;
-position: relative;
-margin-bottom: 60px;
-z-index: 1;
+  max-width: 600px;
+  border: 1px solid black;
+  box-shadow: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  background: #ddd;
+  position: relative;
+  margin-bottom: 60px;
+  z-index: 1;
 }
-.skeleton-container>.card-header{
-display: flex;
-align-items: center;
-padding: 16px;
-/* background-color: black ; */
-/* color:white; */
-
+.skeleton-container > .card-header {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  /* background-color: black ; */
+  /* color:white; */
 }
-.skeleton-container>.image{
+.skeleton-container > .image {
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -162,31 +180,20 @@ padding: 16px;
   width: 100%;
   height: 0;
   padding-bottom: 100%; /* This creates a 1:1 aspect ratio */
-   position: relative; 
-  overflow: hidden; 
-   }
+  position: relative;
+  overflow: hidden;
+}
 
-
-.skeleton-container>.image>img{
-  position:absolute; 
+.skeleton-container > .image > img {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-   
-.skeleton-container >.card-footer{
-    display:flex ;
-padding:10px;
-}
-.btn{
-  border:none;
-  background:none;
-  padding:10px;
-  cursor:pointer;
-  color:grey;
-}
-.btn:hover{
-  color:black;
+
+.skeleton-container > .card-footer {
+  display: flex;
+  padding: 10px;
 }

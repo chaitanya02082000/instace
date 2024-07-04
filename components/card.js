@@ -12,8 +12,7 @@ export const Cardcon = () => {
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const refContainer = useRef(null);
-
+  
   const handleScroll = () => {
     if (
       window.innerHeight + window.scrollY >=
@@ -29,7 +28,7 @@ export const Cardcon = () => {
   }, [page]);
 
   useEffect(() => {
-    const container = refContainer.current;
+     
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
@@ -101,7 +100,7 @@ const Card = ({ cardData }) => {
                 <>
                   ...
                   <button className="btn" onClick={handleReadMore}>
-                    More
+                    more
                   </button>
                 </>
               )}
