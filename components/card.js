@@ -1,63 +1,61 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { api } from "../utils/constants";
 import Skeleton from "./skeleton";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import { useInfinite } from "../hooks/useInfinite";
-
+import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
+import { useGetData } from "../utils/helper";
+import useInfinite from "../hooks/useInfinite";
 export const Cardcon = () => {
-  const [cards, setCards] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState(1);
+  const { isLoading, cards, loaderRef } = useInfinite();
+  // const [page, setPage] = useState(1);
+  // useEffect(() => {
+  //   fetchdata();
+  //   console.log("ueseffectFetchdata PAge");
+  // }, []);
   
-  const handleScroll = () => {
-    if (
-      window.innerHeight + window.scrollY >=
-      document.body.offsetHeight - 10
-    ) {
-      console.log("hello");
-      setPage((prevPage) => prevPage + 1);
-    }
-  };
+  // const handleScroll = useCallback(() => {
+      
+       
+  //    if (window.innerHeight + window.scrollY >= window.offsetHeight) {
+  //      console.log("fucntionHandlescroll fetchiunf data");
+  //     //  setPage((prevPage) => prevPage + 1);
+  //      fetchdata()
+  //    }})
+   
+   
+  // useEffect(() => {
+    
+  //   window.addEventListener("scroll", handleScroll);
+  //   console.log("EventelisteneerUsefefect");
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
-  useEffect(() => {
-    getData();
-  }, [page]);
+//  IMPLEMENTING THE SCORLLING IMPLEMENTAION
 
-  useEffect(() => {
-     
-    window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  const getData = async () => {
-    try {
-      const response = await fetch(api);
-      const data = await response.json();
-      setCards((prevCards) => [...prevCards, ...data]);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+ 
+
   return (
-    <div className="cards-wrapper">
-      {isLoading
-        ? Array(5)
+    <div className="cards-wrapper"     >  
+      {cards.length
+        ? (cards.map((card, index) =>  <Card key={index} cardData={card} /> ))
+        : isLoading &&
+          Array(5)
             .fill()
-            .map((_, index) => <Skeleton key={index} />)
-        : cards.map((card, index) => <Card key={index} cardData={card} />)}
+            .map((_, index) => <Skeleton key={index} />)}
+            <div ref={loaderRef}> </div>
     </div>
   );
 };
 
 const Card = ({ cardData }) => {
   const { title, url, explanation, date } = cardData;
-
+   
   function formatDate(inputDate) {
     const date = new Date(inputDate);
     return new Intl.DateTimeFormat("en-US", {
@@ -89,6 +87,9 @@ const Card = ({ cardData }) => {
           <div className="share">
             <ShareIcon />
           </div>
+          <div className="save">
+            <TurnedInNotIcon sx={{ fontSize: 26 }} />
+          </div>
         </div>
         <div className="footer-text">
           {isExpanded ? (
@@ -107,7 +108,7 @@ const Card = ({ cardData }) => {
             </>
           )}
         </div>
-        <div className="date"> {formatDate(date)} </div>
+        <div className="date" > {formatDate(date)} </div>
       </div>
     </div>
   );

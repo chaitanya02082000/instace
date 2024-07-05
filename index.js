@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Error from "./components/error";
 import { useInfinite } from "./hooks/useInfinite";
 import { Outlet } from "react-router-dom";
+import Saved from "./components/saved";
 const MainApplayout = () => {
   return (
     <>
@@ -33,6 +34,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/explore",
         element: <Explore />,
+      },
+      {
+        path: "/saved",
+        element: <Saved />,
       },
       
     ],
