@@ -54,7 +54,9 @@ export const Cardcon = () => {
 };
 
 const Card = ({ cardData }) => {
-  const { title, url, explanation, date } = cardData;
+
+  
+  const { title, url, explanation, date ,media_type} = cardData;
    
   function formatDate(inputDate) {
     const date = new Date(inputDate);
@@ -77,7 +79,10 @@ const Card = ({ cardData }) => {
     <div className="card-container">
       <div className="card-header">{title}</div>
       <div className="image">
-        <img alt="NASA APOD" src={url} />
+         
+   {/* <iframe className="iframe" src="https://www.youtube.com/embed/fLAFCDq2mPU?"  allowfullscreen frameborder="0" allow="autoplay; fullscreen" alt="video not rendering"  /> */}
+       {media_type=='video'?(<iframe className="iframe" src={url+"autoplay=1&showinfo=0&controls=1&modestbranding=1&iv_load_policy=3&loop=1&rel=0"} frameborder="0"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>):<img alt="not rendering" src={url}  /> } 
+
       </div>
       <div className="card-footer">
         <div className="footer-btn">

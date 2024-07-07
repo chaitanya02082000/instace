@@ -22,8 +22,6 @@ body {
   height: 54px;
   z-index: 1000;
   border-bottom: 1px solid #dbdbdb;
-  
-   
 }
 
 .header-container {
@@ -79,10 +77,10 @@ body {
   font-weight: 600;
   font-size: large;
   box-shadow: 10px;
-  
+
   color: #4d4d4f;
 }
- 
+
 .card-container > .image {
   width: 100%;
   height: auto;
@@ -105,6 +103,14 @@ body {
   object-fit: cover;
 }
 
+.card-container > .image > iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .card-container > .card-footer {
   display: flex;
   flex-direction: column;
@@ -132,14 +138,12 @@ body {
 .footer-btn {
   display: flex;
   margin-left: 0 auto;
-  
 }
-.footer-btn>div:hover{
-  color:#777
-}  
-.footer-btn>.save{
+.footer-btn > div:hover {
+  color: #777;
+}
+.footer-btn > .save {
   margin-left: 82%;
-
 }
 .card-footer > .footer-text {
   display: inline;
@@ -207,8 +211,7 @@ body {
 }
 
 /*Explorer CSS */
-
-
+/* 
 .explore-container {
   display: grid;
   grid-gap: 4px;
@@ -222,7 +225,7 @@ body {
 .explore-image {
   position: relative;
   padding-bottom: 100%; /* Creates a square aspect ratio */
-  overflow: hidden;
+  /* overflow: hidden;
 }
 
 .explore-image img {
@@ -235,14 +238,40 @@ body {
 }
 
 /* For larger images, if needed */
-.explore-image.big {
+/* .explore-image.big {
   grid-column: span 2;
   grid-row: span 2;
-}
+} */
 
 /* Media query for mobile devices */
-@media (max-width: 735px) {
+/* @media (max-width: 735px) {
   .explore-container {
     grid-gap: 2px;
   }
+} */ 
+.explore-container {
+  max-width: 900px;  /* Adjust this value to control overall width */
+  margin: 0 auto;  /* Center the container */
+  padding: 20px;  /* Add some padding around the grid */
+}
+
+.pins-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;  /* Small gap between images */
+}
+
+.pin {
+  aspect-ratio: 1 / 1;  /* Force square aspect ratio */
+  overflow: hidden;
+  position: relative;
+}
+
+.pin img, .pin iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* This will ensure the image covers the entire square */
+  position: absolute;
+  top: 0;
+  left: 0;
 }
