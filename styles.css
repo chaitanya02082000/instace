@@ -275,3 +275,108 @@ body {
   top: 0;
   left: 0;
 }
+
+/*        CSS for rss feed   *//* Step 1: Set up the container for the RSS feed */
+.news-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 400px));
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+/* Step 2: Style the individual news cards */
+.News-cards {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 250px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.News-cards.hovered {
+  transform: scale(1.05);
+}
+
+/* Step 3: Style the images */
+.News-cards img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Step 4: Create an overlay for text */
+.News-cards::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
+}
+
+/* Step 5: Style the text container */
+.News-cards .text-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  color: white;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.News-cards.hovered .text-content {
+  opacity: 0;
+}
+
+/* Step 6: Style the text elements */
+.News-cards h2 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.News-cards p {
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+/* Step 7: Style the content snippet */
+.News-cards .content-snippet {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 15px;
+  overflow-y: auto;
+  z-index: 2;
+}
+
+.News-cards.hovered .content-snippet {
+  display: block;
+}
+
+.News-cards .content-snippet h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.News-cards .content-snippet p {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+/* Step 8: Add responsive design for smaller screens */
+@media (max-width: 850px) {
+  .news-container {
+    grid-template-columns: minmax(0, 400px);
+  }
+}

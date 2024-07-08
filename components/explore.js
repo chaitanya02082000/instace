@@ -2,10 +2,11 @@ import React from "react";
 import useInfinite from "../hooks/useInfinite";
 import Skeleton from "./skeleton";
 
+
 const Explore = () => {
-  const { isLoading, loaderRef, cards } = useInfinite();
+  const { isLoading, loaderRef, cards } = useInfinite(1);
   return (
-    <div className="explore-container">
+    <div className="explore-container" >
       <div className="pins-grid">
         {cards.length
           ? cards.map((card, index) => (
