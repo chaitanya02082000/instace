@@ -1,11 +1,12 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import React from "react";
 import { api } from "./constants";
+import RSSParser from "rss-parser";
 export const useGetData = () => {
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const fetchdata = async () => {
+  const [RSSdata, setData] = useState([]);
+  const fetchdataImage = async () => {
     setIsLoading(true);
     try {
       const response = await fetch(api);
@@ -20,5 +21,27 @@ export const useGetData = () => {
     }
   };
 
-  return { isLoading, cards, fetchdata };
+  const url = "https://api.nytimes.com/services/xml/rss/nyt/Space.xml";
+  const parser = new RSSParser({
+    customFields: {
+      item: [
+        ['media:content', 'mediaContent',],
+        ['media:description', 'mediaDescription']
+      ]
+    }
+  });
+
+  const getdataRSS = async () => {
+    try {
+      const feed = await parser.parseURL(url);
+      setData(feed);
+    } catch (error) {
+      console.error("Error fetching RSS data:", error);
+    }finally {
+      setIsLoading(false);}
+  };
+
+ 
+
+  return { isLoading, cards, fetchdataImage, getdataRSS, RSSdata };
 };

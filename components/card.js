@@ -11,53 +11,46 @@ import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import { useGetData } from "../utils/helper";
 import useInfinite from "../hooks/useInfinite";
 export const Cardcon = () => {
-  const { isLoading, cards, loaderRef } = useInfinite();
+  const { isLoading, cards, loaderRef } = useInfinite(1);
   // const [page, setPage] = useState(1);
   // useEffect(() => {
   //   fetchdata();
   //   console.log("ueseffectFetchdata PAge");
   // }, []);
-  
+
   // const handleScroll = useCallback(() => {
-      
-       
+
   //    if (window.innerHeight + window.scrollY >= window.offsetHeight) {
   //      console.log("fucntionHandlescroll fetchiunf data");
   //     //  setPage((prevPage) => prevPage + 1);
   //      fetchdata()
   //    }})
-   
-   
+
   // useEffect(() => {
-    
+
   //   window.addEventListener("scroll", handleScroll);
   //   console.log("EventelisteneerUsefefect");
   //   return () => window.removeEventListener("scroll", handleScroll);
   // }, []);
 
-//  IMPLEMENTING THE SCORLLING IMPLEMENTAION
-
-
- 
+  //  IMPLEMENTING THE SCORLLING IMPLEMENTAION
 
   return (
-    <div className="cards-wrapper"     >  
+    <div className="cards-wrapper">
       {cards.length
-        ? (cards.map((card, index) =>  <Card key={index} cardData={card} /> ))
+        ? cards.map((card, index) => <Card key={index} cardData={card} />)
         : isLoading &&
           Array(5)
             .fill()
             .map((_, index) => <Skeleton key={index} />)}
-            <div ref={loaderRef}> </div>
+      <div ref={loaderRef}> </div>
     </div>
   );
 };
 
 const Card = ({ cardData }) => {
+  const { title, url, explanation, date, media_type } = cardData;
 
-  
-  const { title, url, explanation, date ,media_type} = cardData;
-   
   function formatDate(inputDate) {
     const date = new Date(inputDate);
     return new Intl.DateTimeFormat("en-US", {
@@ -79,10 +72,21 @@ const Card = ({ cardData }) => {
     <div className="card-container">
       <div className="card-header">{title}</div>
       <div className="image">
-         
-   {/* <iframe className="iframe" src="https://www.youtube.com/embed/fLAFCDq2mPU?"  allowfullscreen frameborder="0" allow="autoplay; fullscreen" alt="video not rendering"  /> */}
-       {media_type=='video'?(<iframe className="iframe" src={url+"autoplay=1&showinfo=0&controls=1&modestbranding=1&iv_load_policy=3&loop=1&rel=0"} frameborder="0"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>):<img alt="not rendering" src={url}  /> } 
-
+        {/* <iframe className="iframe" src="https://www.youtube.com/embed/fLAFCDq2mPU?"  allowfullscreen frameborder="0" allow="autoplay; fullscreen" alt="video not rendering"  /> */}
+        {media_type == "video" ? (
+          <iframe
+            className="iframe"
+            src={
+              url +
+              "autoplay=1&showinfo=0&controls=1&modestbranding=1&iv_load_policy=3&loop=1&rel=0"
+            }
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        ) : (
+          <img alt="not rendering" src={url} />
+        )}
       </div>
       <div className="card-footer">
         <div className="footer-btn">
@@ -113,7 +117,7 @@ const Card = ({ cardData }) => {
             </>
           )}
         </div>
-        <div className="date" > {formatDate(date)} </div>
+        <div className="date"> {formatDate(date)} </div>
       </div>
     </div>
   );
