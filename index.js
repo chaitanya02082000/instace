@@ -8,11 +8,10 @@ import Error from "./components/error";
 import { useInfinite } from "./hooks/useInfinite";
 import { Outlet } from "react-router-dom";
 import Saved from "./components/saved";
-import News from "./components/news";
 const MainApplayout = () => {
   return (
     <>
-       <Header /> 
+      <Header />
       <Outlet />
       {/* <div className="center"><Cardcon/></div> */}
 
@@ -20,12 +19,11 @@ const MainApplayout = () => {
     </>
   );
 };
- 
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <MainApplayout  />,
+    element: <MainApplayout />,
     errorElement: <Error />,
     children: [
       {
@@ -41,10 +39,7 @@ const appRouter = createBrowserRouter([
         path: "/saved",
         element: <Saved />,
       },
-      {
-        path: "/news",
-        element: <News />,
-      },
+      
     ],
   },
 ]);

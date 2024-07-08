@@ -17,17 +17,9 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router": "^6.24.0",
-    "react-router-dom": "^6.24.0",
-    "rss-parser": "^3.13.0"
+    "react-router-dom": "^6.24.0"
   },
   "devDependencies": {
-    "buffer": "^6.0.3",
-    "events": "^3.3.0",
-    "https-browserify": "^1.0.0",
-    "process": "^0.11.10",
-    "stream-browserify": "^3.0.0",
-    "stream-http": "^3.2.0",
-    "timers-browserify": "^2.0.12",
-    "url": "^0.11.3"
+    "process": "^0.11.10"
   }
 }
