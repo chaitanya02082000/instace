@@ -13,6 +13,9 @@ import Newsfooter from "./components/news-footer";
 import Articles from "./components/Articles.js";
 import Forecast from "./components/forecast";
 import Rssfeed from "./components/rss.js";
+ 
+
+
 const MainApplayout = () => {
   return (
     <>
@@ -51,7 +54,7 @@ const appRouter = createBrowserRouter([
         children:[
           {
             path: "/news",
-            path:"/news/rss",
+            
             element: <Rssfeed/>,
           },
           {

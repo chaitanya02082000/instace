@@ -5,7 +5,7 @@ const Newsfooter = () => {
     <div className="news-footer">
       <ul>
         <li>
-          <button className="tab-button"><Link to="/news/rss">RSS</Link></button>
+          <button className="tab-button"><Link to="/news">RSS</Link></button>
         </li>
         <li>
           <button className="tab-button"><Link to="/news/forecast"> Forecast</Link></button>

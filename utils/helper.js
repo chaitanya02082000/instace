@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import React from "react";
-import { api } from "./constants";
+import { api,url } from "./constants";
 import RSSParser from "rss-parser";
 export const useGetData = () => {
   const [cards, setCards] = useState([]);
@@ -21,7 +21,7 @@ export const useGetData = () => {
     }
   };
 
-  const url = "https://api.nytimes.com/services/xml/rss/nyt/Space.xml";
+
   const parser = new RSSParser({
     customFields: {
       item: [
@@ -40,6 +40,7 @@ export const useGetData = () => {
     }finally {
       setIsLoading(false);}
   };
+
 
  
 
