@@ -60,7 +60,7 @@ body {
   max-width: 600px;
   border: 1px solid #f0e2e2dd;
   border-width: 2px;
-  box-shadow: 20px;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   margin: 0 auto;
   position: relative;
@@ -77,8 +77,9 @@ body {
   font-weight: 600;
   font-size: large;
   box-shadow: 10px;
-
+   
   color: #4d4d4f;
+   
 }
 
 .card-container > .image {
@@ -92,6 +93,7 @@ body {
   padding-bottom: 100%; /* This creates a 1:1 aspect ratio */
   position: relative;
   overflow: hidden;
+   
 }
 
 .card-container > .image > img {
@@ -115,7 +117,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-
+   
   padding: 10px;
   font-family: "Poppins", sans-serif;
   font-weight: light;
@@ -164,50 +166,91 @@ body {
   color: #777;
 }
 /*  Skeleton Cssss */
-.skeleton-container {
-  width: 100%;
-  max-width: 600px;
-  border: 1px solid black;
-  box-shadow: 10px;
-  border-radius: 10px;
-  margin: 10px;
-  background: #ddd;
+/* styles.css */
+.card-skeleton {
   position: relative;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+  background : #FFF;
+  border-radius: 10px;
+  height: 600px;
+   
+  width: 600px;
+  max-width: 600px;
+  margin:  0 auto;
   margin-bottom: 60px;
   z-index: 1;
 }
-.skeleton-container > .card-header {
-  display: flex;
-  align-items: center;
-  padding: 16px;
-  /* background-color: black ; */
-  /* color:white; */
-}
-.skeleton-container > .image {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  object-fit: cover;
-  display: block;
-  width: 100%;
-  height: 0;
-  padding-bottom: 100%; /* This creates a 1:1 aspect ratio */
+
+.shimmerBG {
+  animation-duration: 2.2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: shimmer;
+  animation-timing-function: linear;
+  background: #ddd;
+  background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
+  background-size: 1200px 100%;
   position: relative;
   overflow: hidden;
+  height:100%
 }
 
-.skeleton-container > .image > img {
+@keyframes shimmer {
+  0% {
+    background-position: -1200px 0;
+  }
+  100% {
+    background-position: 1200px 0;
+  }
+}
+
+.media {
+  height: 200px;
+}
+
+.p-32 {
+  padding: 32px;
+}
+
+.title-line {
+  height: 24px;
+  width: 100%;
+  margin-bottom: 12px;
+  border-radius: 20px;
+}
+
+.content-line {
+  height: 8px;
+  width: 100%;
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+.end {
+  width: 40%;
+}
+
+.m-t-24 {
+  margin-top: 24px;
+}
+
+.explore-shimmer {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  background: linear-gradient(to right, #f0f0f0 4%, #e0e0e0 25%, #f0f0f0 36%);
+  animation: explore-shimmer 2s infinite;
 }
 
-.skeleton-container > .card-footer {
-  display: flex;
-  padding: 10px;
+@keyframes explore-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 /*Explorer CSS */
@@ -328,6 +371,7 @@ body {
   color: white;
   z-index: 1;
   transition: opacity 0.3s ease;
+  font-family: "Poppins", sans-serif;
 }
 
 .News-cards.hovered .text-content {
@@ -358,6 +402,11 @@ body {
   padding: 15px;
   overflow-y: auto;
   z-index: 2;
+  font-family: "Poppins", sans-serif;
+   
+  font-style: normal;
+  font-size: small;
+   
 }
 
 .News-cards.hovered .content-snippet {
