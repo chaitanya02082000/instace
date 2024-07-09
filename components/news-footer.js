@@ -15,9 +15,7 @@ const Newsfooter = () => {
         </li>
       </ul>
     </div>
- 
-
-);
+  );
 };
 
 export default Newsfooter;
