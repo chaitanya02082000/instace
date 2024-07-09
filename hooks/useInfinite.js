@@ -1,3 +1,4 @@
+// useInfinite.js
 import { useState, useRef, useCallback, useEffect } from "react";
 import { useGetData } from "../utils/helper";
 
@@ -7,12 +8,14 @@ const useInfinite = (props) => {
   const [page, setPage] = useState(1);
   const loaderRef = useRef(null);
   const [error, setError] = useState(null);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
 
   const handleObserver = useCallback(
     (entries) => {
       const target = entries[0];
       if (target.isIntersecting && !isLoading) {
         setPage((prevPage) => prevPage + 1);
+        setIsFetchingMore(true);
       }
     },
     [isLoading]
@@ -27,21 +30,24 @@ const useInfinite = (props) => {
         } else {
           await getdataRSS();
           console.log("Fetching RSS data...");
+          
         }
+        setIsFetchingMore(false);
       } catch (err) {
         console.error("Error fetching data:", err);
         setError("Failed to load data. Please try again.");
+        setIsFetchingMore(false);
       }
     };
 
     fetchData();
-  }, [ page]);
+  }, [page]);
 
   useEffect(() => {
     const option = {
       root: null,
-      rootMargin: "500px",
-      threshold: 1,
+      rootMargin: "1500px",
+      threshold: 0.25,
     };
     const observer = new IntersectionObserver(handleObserver, option);
     if (loaderRef.current) {
@@ -57,7 +63,7 @@ const useInfinite = (props) => {
     };
   }, [handleObserver]);
 
-  return { isLoading, cards, loaderRef, RSSdata, error };
+  return { isLoading, cards, loaderRef, RSSdata, error, isFetchingMore };
 };
 
 export default useInfinite;

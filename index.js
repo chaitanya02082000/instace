@@ -9,6 +9,10 @@ import { useInfinite } from "./hooks/useInfinite";
 import { Outlet } from "react-router-dom";
 import Saved from "./components/saved";
 import News from "./components/news";
+import Newsfooter from "./components/news-footer";
+import Articles from "./components/Articles.js";
+import Forecast from "./components/forecast";
+import Rssfeed from "./components/rss.js";
 const MainApplayout = () => {
   return (
     <>
@@ -44,7 +48,24 @@ const appRouter = createBrowserRouter([
       {
         path: "/news",
         element: <News />,
+        children:[
+          {
+            path: "/news",
+            path:"/news/rss",
+            element: <Rssfeed/>,
+          },
+          {
+            path: "/news/articles",
+            element: <Articles/>,
+          },
+          {
+            path: "/news/forecast",
+            element: <Forecast/>,
+          },
+        ]
+         
       },
+       
     ],
   },
 ]);

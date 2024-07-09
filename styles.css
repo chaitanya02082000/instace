@@ -326,6 +326,7 @@ body {
   gap: 20px;
   padding: 20px;
   justify-content: center;
+  margin-bottom: 50px;
 }
 
 /* Step 2: Style the individual news cards */
@@ -428,4 +429,57 @@ body {
   .news-container {
     grid-template-columns: minmax(0, 400px);
   }
+}
+
+ 
+.news-footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: white;
+  border-top: 1px solid #dbdbdb;
+  padding: 0.5rem 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: light;
+  font-style: normal;
+  font-size: small;
+  color: #262626;
+   z-index: 1000;
+}
+
+.news-footer ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.news-footer li {
+  flex: 1;
+  text-align: center;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #8e8e8e;
+   
+}
+
+.tab-button:hover,
+.tab-button:focus {
+  color: #000;
+}
+
+.tab-button:active {
+  color: #8e8e8e;
 }

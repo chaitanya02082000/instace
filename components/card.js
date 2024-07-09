@@ -1,52 +1,29 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { useEffect, useState, useRef, useCallback } from "react";
-import { api } from "../utils/constants";
+import React, { useState } from "react";
 import Skeleton from "./skeleton";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
-import { useInfinite } from "../hooks/useInfinite";
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
-import { useGetData } from "../utils/helper";
 import useInfinite from "../hooks/useInfinite";
+import CardSkeleton from "../components/CardSkeleton";
 export const Cardcon = () => {
-  const { isLoading, cards, loaderRef } = useInfinite(1);
-  // const [page, setPage] = useState(1);
-  // useEffect(() => {
-  //   fetchdata();
-  //   console.log("ueseffectFetchdata PAge");
-  // }, []);
-
-  // const handleScroll = useCallback(() => {
-
-  //    if (window.innerHeight + window.scrollY >= window.offsetHeight) {
-  //      console.log("fucntionHandlescroll fetchiunf data");
-  //     //  setPage((prevPage) => prevPage + 1);
-  //      fetchdata()
-  //    }})
-
-  // useEffect(() => {
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   console.log("EventelisteneerUsefefect");
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
-
-  //  IMPLEMENTING THE SCORLLING IMPLEMENTAION
+  const { isLoading, cards, loaderRef, isFetchingMore } = useInfinite(1);
 
   return (
     <div className="cards-wrapper">
-      {cards.length
-        ? cards.map((card, index) => <Card key={index} cardData={card} />)
-        : isLoading &&
-          Array(5)
+      {isLoading
+        ? Array(5)
             .fill()
-            .map((_, index) => <Skeleton key={index} />)}
+            .map((_, index) => <CardSkeleton key={index} />)
+        : cards.map((card, index) => <Card key={index} cardData={card} />)}
+      {isFetchingMore &&
+        Array(5)
+          .fill()
+          .map((_, index) => <CardSkeleton key={`skeleton-${index}`} />)}
       <div ref={loaderRef}> </div>
     </div>
   );
 };
+
 
 const Card = ({ cardData }) => {
   const { title, url, explanation, date, media_type } = cardData;
@@ -68,21 +45,23 @@ const Card = ({ cardData }) => {
   const handleReadMore = () => {
     setIsExpanded(true);
   };
+
+  
+
   return (
     <div className="card-container">
       <div className="card-header">{title}</div>
       <div className="image">
-        {/* <iframe className="iframe" src="https://www.youtube.com/embed/fLAFCDq2mPU?"  allowfullscreen frameborder="0" allow="autoplay; fullscreen" alt="video not rendering"  /> */}
-        {media_type == "video" ? (
+        {media_type === "video" ? (
           <iframe
             className="iframe"
             src={
               url +
               "autoplay=1&showinfo=0&controls=1&modestbranding=1&iv_load_policy=3&loop=1&rel=0"
             }
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         ) : (
           <img alt="not rendering" src={url} />
@@ -122,3 +101,4 @@ const Card = ({ cardData }) => {
     </div>
   );
 };
+
