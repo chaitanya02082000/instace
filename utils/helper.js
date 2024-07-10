@@ -1,11 +1,12 @@
 import { useState, useCallback, useEffect } from "react";
 import React from "react";
-import { api,url } from "./constants";
+import { api,url,api10 } from "./constants";
 import RSSParser from "rss-parser";
 export const useGetData = () => {
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [RSSdata, setData] = useState([]);
+  const [cards10,setCards10]=useState([])
   const fetchdataImage = async () => {
     setIsLoading(true);
     try {
@@ -20,7 +21,20 @@ export const useGetData = () => {
       setIsLoading(false);
     }
   };
-
+  const fetchdataImage10 = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(api10);
+      const data = await response.json();
+      setCards10((prev) => {
+        return [...new Set([...prev, ...data])];
+      });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const parser = new RSSParser({
     customFields: {
@@ -44,5 +58,5 @@ export const useGetData = () => {
 
  
 
-  return { isLoading, cards, fetchdataImage, getdataRSS, RSSdata };
+  return { isLoading, cards, fetchdataImage, getdataRSS, RSSdata,cards10,fetchdataImage10 };
 };

@@ -160,11 +160,9 @@ export const Cardcon = () => {
       maxWidth: 470, 
       mx: 'auto' 
     }}>
-      {isLoading
-        ? Array(5).fill().map((_, index) => <CardComponent key={index} loading />)
-        : cards.map((card, index) => <CardComponent key={index} cardData={card} />)}
-      {isFetchingMore &&
-        Array(5).fill().map((_, index) => <CardComponent key={`skeleton-${index}`} loading />)}
+       { cards.map((card, index) => <CardComponent key={index} cardData={card} />)}
+      {/* {isFetchingMore &&
+        Array(5).fill().map((_, index) => <CardComponent key={`skeleton-${index}`} loading />)} */}
       <div ref={loaderRef}></div>
     </Box>
   );
