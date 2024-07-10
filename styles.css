@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Cookie&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
 a {
   text-decoration: none;
   color: inherit;
@@ -10,6 +11,7 @@ body {
   background: #eee;
   padding-top: 54px;
 }
+
 .page-header {
   position: fixed;
   display: flex;
@@ -35,12 +37,11 @@ body {
 }
 
 .header-container > .logo {
-  justify-content: center;
   font-family: "Cookie", cursive;
   font-weight: 500;
-  font-style: normal;
   font-size: 50px;
 }
+
 .header-container > .button > ul {
   display: flex;
   cursor: pointer;
@@ -50,83 +51,34 @@ body {
 .header-container > .button > ul > li {
   padding: 5px;
 }
+
 .center {
   justify-content: center;
   display: flex;
 }
+
 .card-container {
   background: #fff;
-  width: 100%;
-  max-width: 600px;
   border: 1px solid #f0e2e2dd;
-  border-width: 2px;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  margin: 0 auto;
-  position: relative;
   margin-bottom: 60px;
-  z-index: 1;
 }
+
 .card-container > .card-header {
-  display: flex;
-  align-items: center;
   padding: 16px;
-  /* background-color: black ; */
-  /* color:white; */
   font-family: "Roboto", sans-serif;
   font-weight: 600;
   font-size: large;
-  box-shadow: 10px;
-   
   color: #4d4d4f;
-   
 }
 
-.card-container > .image {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  object-fit: cover;
-  display: block;
-  width: 100%;
-  height: 0;
-  padding-bottom: 100%; /* This creates a 1:1 aspect ratio */
-  position: relative;
-  overflow: hidden;
-   
-}
-
-.card-container > .image > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.card-container > .image > iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 .card-container > .card-footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-   
   padding: 10px;
   font-family: "Poppins", sans-serif;
   font-weight: light;
-  font-style: normal;
   font-size: small;
   color: #262626;
-}
-.footer-text span {
-  display: inline; /* Ensure the ellipsis and text are inline */
 }
 
 .btn {
@@ -137,26 +89,8 @@ body {
   color: grey;
 }
 
-.footer-btn {
-  display: flex;
-  margin-left: 0 auto;
-}
 .footer-btn > div:hover {
   color: #777;
-}
-.footer-btn > .save {
-  margin-left: 82%;
-}
-.card-footer > .footer-text {
-  display: inline;
-  position: relative;
-  flex-wrap: nowrap;
-}
-
-.footer-btn > div {
-  padding: 5px;
-  margin: 0;
-  margin-bottom: 0 auto;
 }
 
 .date {
@@ -164,322 +98,4 @@ body {
   font-weight: lighter;
   padding: 10px;
   color: #777;
-}
-/*  Skeleton Cssss */
-/* styles.css */
-.card-skeleton {
-  position: relative;
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
-  background : #FFF;
-  border-radius: 10px;
-  height: 600px;
-   
-  width: 600px;
-  max-width: 600px;
-  margin:  0 auto;
-  margin-bottom: 60px;
-  z-index: 1;
-}
-
-.shimmerBG {
-  animation-duration: 2.2s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  animation-name: shimmer;
-  animation-timing-function: linear;
-  background: #ddd;
-  background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
-  background-size: 1200px 100%;
-  position: relative;
-  overflow: hidden;
-  height:100%
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -1200px 0;
-  }
-  100% {
-    background-position: 1200px 0;
-  }
-}
-
-.media {
-  height: 200px;
-}
-
-.p-32 {
-  padding: 32px;
-}
-
-.title-line {
-  height: 24px;
-  width: 100%;
-  margin-bottom: 12px;
-  border-radius: 20px;
-}
-
-.content-line {
-  height: 8px;
-  width: 100%;
-  margin-bottom: 16px;
-  border-radius: 8px;
-}
-
-.end {
-  width: 40%;
-}
-
-.m-t-24 {
-  margin-top: 24px;
-}
-
-.explore-shimmer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, #f0f0f0 4%, #e0e0e0 25%, #f0f0f0 36%);
-  animation: explore-shimmer 2s infinite;
-}
-
-@keyframes explore-shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-/*Explorer CSS */
-/* 
-.explore-container {
-  display: grid;
-  grid-gap: 4px;
-  grid-template-columns: repeat(3, 1fr);
-  max-width: 935px;
-  margin: 0 auto;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.explore-image {
-  position: relative;
-  padding-bottom: 100%; /* Creates a square aspect ratio */
-  /* overflow: hidden;
-}
-
-.explore-image img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* For larger images, if needed */
-/* .explore-image.big {
-  grid-column: span 2;
-  grid-row: span 2;
-} */
-
-/* Media query for mobile devices */
-/* @media (max-width: 735px) {
-  .explore-container {
-    grid-gap: 2px;
-  }
-} */ 
-.explore-container {
-  max-width: 900px;  /* Adjust this value to control overall width */
-  margin: 0 auto;  /* Center the container */
-  padding: 20px;  /* Add some padding around the grid */
-}
-
-.pins-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4px;  /* Small gap between images */
-}
-
-.pin {
-  aspect-ratio: 1 / 1;  /* Force square aspect ratio */
-  overflow: hidden;
-  position: relative;
-}
-
-.pin img, .pin iframe {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;  /* This will ensure the image covers the entire square */
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-/*        CSS for rss feed   *//* Step 1: Set up the container for the RSS feed */
-.news-container {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 400px));
-  gap: 20px;
-  padding: 20px;
-  justify-content: center;
-  margin-bottom: 50px;
-}
-
-/* Step 2: Style the individual news cards */
-.News-cards {
-  position: relative;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  height: 250px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.News-cards.hovered {
-  transform: scale(1.05);
-}
-
-/* Step 3: Style the images */
-.News-cards img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Step 4: Create an overlay for text */
-.News-cards::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
-}
-
-/* Step 5: Style the text container */
-.News-cards .text-content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 15px;
-  color: white;
-  z-index: 1;
-  transition: opacity 0.3s ease;
-  font-family: "Poppins", sans-serif;
-}
-
-.News-cards.hovered .text-content {
-  opacity: 0;
-}
-
-/* Step 6: Style the text elements */
-.News-cards h2 {
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-
-.News-cards p {
-  font-size: 12px;
-  margin-bottom: 4px;
-}
-
-/* Step 7: Style the content snippet */
-.News-cards .content-snippet {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.8);
-  color: white;
-  padding: 15px;
-  overflow-y: auto;
-  z-index: 2;
-  font-family: "Poppins", sans-serif;
-   
-  font-style: normal;
-  font-size: small;
-   
-}
-
-.News-cards.hovered .content-snippet {
-  display: block;
-}
-
-.News-cards .content-snippet h2 {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.News-cards .content-snippet p {
-  font-size: 12px;
-  margin-bottom: 5px;
-}
-
-/* Step 8: Add responsive design for smaller screens */
-@media (max-width: 850px) {
-  .news-container {
-    grid-template-columns: minmax(0, 400px);
-  }
-}
-
- 
-.news-footer {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  background-color: white;
-  border-top: 1px solid #dbdbdb;
-  padding: 0.5rem 0;
-  font-family: "Poppins", sans-serif;
-  font-weight: light;
-  font-style: normal;
-  font-size: small;
-  color: #262626;
-   z-index: 1000;
-}
-
-.news-footer ul {
-  list-style: none;
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
-
-.news-footer li {
-  flex: 1;
-  text-align: center;
-}
-
-.tab-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  color: #8e8e8e;
-   
-}
-
-.tab-button:hover,
-.tab-button:focus {
-  color: #000;
-}
-
-.tab-button:active {
-  color: #8e8e8e;
 }

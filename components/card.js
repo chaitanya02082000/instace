@@ -1,34 +1,27 @@
-import React, { useState } from "react";
-import Skeleton from "./skeleton";
+import React from 'react';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import CardActions from '@mui/material/CardActions';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import Skeleton from '@mui/material/Skeleton';
+import Box from '@mui/material/Box';  // Add this import
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ShareIcon from "@mui/icons-material/Share";
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import useInfinite from "../hooks/useInfinite";
-import CardSkeleton from "../components/CardSkeleton";
-export const Cardcon = () => {
-  const { isLoading, cards, loaderRef, isFetchingMore } = useInfinite(1);
-
-  return (
-    <div className="cards-wrapper">
-      {isLoading
-        ? Array(5)
-            .fill()
-            .map((_, index) => <CardSkeleton key={index} />)
-        : cards.map((card, index) => <Card key={index} cardData={card} />)}
-      {isFetchingMore &&
-        Array(5)
-          .fill()
-          .map((_, index) => <CardSkeleton key={`skeleton-${index}`} />)}
-      <div ref={loaderRef}> </div>
-    </div>
-  );
-};
-
-
-const Card = ({ cardData }) => {
-  const { title, url, explanation, date, media_type } = cardData;
+import { useState } from 'react'; 
+import { Button } from '@mui/material';
+const CardComponent = ({ loading, cardData }) => {
+  const { title, url, explanation, date, media_type } = cardData || {};
+  const [isExpanded, setIsExpanded] = useState(false);
+  const wordLimit = 15;
 
   function formatDate(inputDate) {
+    if (!inputDate) return '';
     const date = new Date(inputDate);
     return new Intl.DateTimeFormat("en-US", {
       year: "numeric",
@@ -37,68 +30,142 @@ const Card = ({ cardData }) => {
     }).format(date);
   }
 
-  const [isExpanded, setIsExpanded] = useState(false);
-  const wordLimit = 15;
-  const words = explanation.split(" ");
-  const truncatedText = words.slice(0, wordLimit).join(" ");
-  const isTextLong = words.length > wordLimit;
-  const handleReadMore = () => {
-    setIsExpanded(true);
+  const truncateText = (text) => {
+    const words = text.split(' ');
+    if (words.length > wordLimit) {
+      return words.slice(0, wordLimit).join(' ') + '...';
+    }
+    return text;
   };
 
-  
-
   return (
-    <div className="card-container">
-      <div className="card-header">{title}</div>
-      <div className="image">
-        {media_type === "video" ? (
-          <iframe
-            className="iframe"
-            src={
-              url +
-              "autoplay=1&showinfo=0&controls=1&modestbranding=1&iv_load_policy=3&loop=1&rel=0"
-            }
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
-        ) : (
-          <img alt="not rendering" src={url} />
-        )}
-      </div>
-      <div className="card-footer">
-        <div className="footer-btn">
-          <div className="like">
-            <FavoriteBorderOutlinedIcon />
-          </div>
-          <div className="share">
-            <ShareIcon />
-          </div>
-          <div className="save">
-            <TurnedInNotIcon sx={{ fontSize: 26 }} />
-          </div>
-        </div>
-        <div className="footer-text">
-          {isExpanded ? (
-            explanation
+    <Card sx={{ 
+      width: '100%', 
+      maxWidth: 470, 
+      mb: 2, 
+      boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
+      borderRadius: '3px'
+    }}>
+      <CardHeader
+        sx={{ py: 1 }}
+        title={
+          loading ? (
+            <Skeleton animation="wave" height={20} width="60%" />
           ) : (
-            <>
-              {truncatedText}
-              {isTextLong && (
-                <>
-                  ...
-                  <button className="btn" onClick={handleReadMore}>
-                    more
-                  </button>
-                </>
+            <Typography variant="subtitle1">{title}</Typography>
+          )
+        }
+      />
+      <Box sx={{ position: 'relative', paddingTop: '100%', overflow: 'hidden' }}>
+        {loading ? (
+          <Skeleton 
+            animation="wave" 
+            variant="rectangular" 
+            sx={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+          />
+        ) : (
+          media_type === "video" ? (
+            <CardMedia
+              component="iframe"
+              sx={{ 
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                border: 'none'
+              }}
+              src={url + "autoplay=1&showinfo=0&controls=1&modestbranding=1&iv_load_policy=3&loop=1&rel=0"}
+              allowFullScreen
+            />
+          ) : (
+            <CardMedia
+              component="img"
+              sx={{ 
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover'
+              }}
+              image={url}
+              alt={title}
+            />
+          )
+        )}
+      </Box>
+      <CardActions disableSpacing sx={{ pb: 0 }}>
+        <IconButton aria-label="add to favorites">
+          <FavoriteBorderOutlinedIcon />
+        </IconButton>
+        <IconButton aria-label="share">
+          <ShareIcon />
+        </IconButton>
+        <IconButton aria-label="save">
+          <TurnedInNotIcon />
+        </IconButton>
+      </CardActions>
+      <CardContent sx={{ pt: 1, pb: 2 }}>
+        {loading ? (
+          <React.Fragment>
+            <Skeleton animation="wave" height={15} style={{ marginBottom: 6 }} />
+            <Skeleton animation="wave" height={15} width="80%" />
+          </React.Fragment>
+        ) : (
+          <>
+            <Typography variant="body2" color="text.secondary" sx={{ display: 'inline' }}>
+              {isExpanded ? explanation : truncateText(explanation)}
+              {!isExpanded && explanation.split(' ').length > wordLimit && (
+                <Button 
+                  size="small" 
+                  onClick={() => setIsExpanded(true)}
+                  sx={{ 
+                    ml: 0.5, 
+                    textTransform: 'none', 
+                    p: 0, 
+                    minWidth: 'auto', 
+                    fontWeight: 'normal',
+                    color: 'text.secondary',
+                    fontSize: 'inherit',
+                    '&:hover': {
+                      background: 'none',
+                      textDecoration: 'underline'
+                    }
+                  }}
+                >
+                  more
+                </Button>
               )}
-            </>
-          )}
-        </div>
-        <div className="date"> {formatDate(date)} </div>
-      </div>
-    </div>
+            </Typography>
+            <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 1 }}>
+              {formatDate(date)}
+            </Typography>
+          </>
+        )}
+      </CardContent>
+    </Card>
   );
 };
 
+export const Cardcon = () => {
+  const { isLoading, cards, loaderRef, isFetchingMore } = useInfinite(1);
+
+  return (
+    <Box sx={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      width: '100%', 
+      maxWidth: 470, 
+      mx: 'auto' 
+    }}>
+      {isLoading
+        ? Array(5).fill().map((_, index) => <CardComponent key={index} loading />)
+        : cards.map((card, index) => <CardComponent key={index} cardData={card} />)}
+      {isFetchingMore &&
+        Array(5).fill().map((_, index) => <CardComponent key={`skeleton-${index}`} loading />)}
+      <div ref={loaderRef}></div>
+    </Box>
+  );
+};

@@ -46,8 +46,8 @@ const useInfinite = (props) => {
   useEffect(() => {
     const option = {
       root: null,
-      rootMargin: "1500px",
-      threshold: 0.25,
+      rootMargin: "1px",
+      threshold: 1,
     };
     const observer = new IntersectionObserver(handleObserver, option);
     if (loaderRef.current) {
