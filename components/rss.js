@@ -62,9 +62,24 @@ const CarD = ({ item }) => {
         transform: isHovered ? "scale(1.05)" : "scale(1)",
       }}
     >
-      {item.mediaContent && item.mediaContent && item.mediaContent.$ && (
-        <CardMedia component="img" height="140" image={item.mediaContent.$.url} alt={item.title || "RSS image"} />
-      )}
+      {item?.mediaContent?.$?.url && (
+  <CardMedia
+    component="img"
+    height="140"
+    image={item.mediaContent.$.url}
+    alt={item.title ?? "RSS image"}
+  />
+)} {item?.mediaThumbnail?.$?.url && (
+  <CardMedia
+    component="img"
+    height="140"
+    image={item.mediaThumbnail.$.url}
+    alt={item.title ?? "RSS image"}
+  />
+)}
+
+
+       
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {item.title}

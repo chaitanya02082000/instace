@@ -4,7 +4,7 @@ import { useGetData } from "../utils/helper";
 
 const useInfinite = (props) => {
   const flag = props;
-  const { isLoading, cards, fetchdataImage, getdataRSS, RSSdata,fetchdataImage10,cards10 } = useGetData();
+  const { setArticlePage,articlePage,articles,fetchArticles, isLoading, cards, fetchdataImage, getdataRSS, RSSdata,fetchdataImage10,cards10,addNewFeed } = useGetData();
   const [page, setPage] = useState(1);
   const loaderRef = useRef(null);
   const [error, setError] = useState(null);
@@ -15,6 +15,7 @@ const useInfinite = (props) => {
       const target = entries[0];
       if (target.isIntersecting && !isLoading) {
         setPage((prevPage) => prevPage + 1);
+        setArticlePage((prev)=>prev+1);
         setIsFetchingMore(true);
       }
     },
@@ -31,7 +32,11 @@ const useInfinite = (props) => {
           await fetchdataImage10();
           console.log("Fetching explore data...");
           
-        } else {
+        }else if(flag===4){
+          await fetchArticles();
+          console.log("Fetching Article data...");
+          
+        }  else {
           await getdataRSS();
           console.log("Fetching RSS data...");
           
@@ -45,7 +50,7 @@ const useInfinite = (props) => {
     };
 
     fetchData();
-  }, [page]);
+  }, [page,articlePage]);
 
   useEffect(() => {
     const option = {
@@ -67,7 +72,7 @@ const useInfinite = (props) => {
     };
   }, [handleObserver]);
 
-  return { isLoading, cards, loaderRef, RSSdata, error, isFetchingMore ,cards10};
+  return { articles,isLoading, cards, loaderRef, RSSdata, error, isFetchingMore ,cards10};
 };
 
 export default useInfinite;
