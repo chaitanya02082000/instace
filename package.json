@@ -4,8 +4,8 @@
   "description": "This is a project for using Nasa Api to fetch images and display them in a scrolling manner",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx parcel index.html"
-    
+    "start": "npx parcel index.html",
+    "build": "npx parcel build --output build"
   },
   "keywords": [],
   "author": "",
