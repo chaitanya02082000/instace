@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useInfinite from "../hooks/useInfinite";
-import { Card, CardMedia, Typography, Box } from "@mui/material";
+import { Card, CardMedia, Typography, Box, setRef } from "@mui/material";
 
 const Articles = () => {
   const { articles, loaderRef } = useInfinite(4);
