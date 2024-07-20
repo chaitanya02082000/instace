@@ -190,6 +190,7 @@ export const Cardcon = () => {
     localStorage.setItem("test", JSON.stringify(dates));
     console.log(JSON.parse(localStorage.getItem("test")));
   }, [dates]);
+
   return (
     <Box
       sx={{
@@ -201,11 +202,21 @@ export const Cardcon = () => {
         mx: "auto",
       }}
     >
-      {cards.map((card, index) => (
-        <CardComponent key={index} cardData={card} saveDates={saveDates} />
-      ))}
-      {/* {isFetchingMore &&
-        Array(5).fill().map((_, index) => <CardComponent key={`skeleton-${index}`} loading />)} */}
+      {isLoading && !cards.length ? (
+        // Display initial loading skeletons
+        Array(5).fill().map((_, index) => (
+          <CardComponent key={`initial-skeleton-${index}`} loading />
+        ))
+      ) : (
+        // Display loaded cards
+        cards.map((card, index) => (
+          <CardComponent key={index} cardData={card} saveDates={saveDates} />
+        ))
+      )}
+      {isFetchingMore &&
+        Array(3).fill().map((_, index) => (
+          <CardComponent key={`more-skeleton-${index}`} loading />
+        ))}
       <div ref={loaderRef}></div>
     </Box>
   );
