@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
@@ -8,17 +8,31 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Skeleton from "@mui/material/Skeleton";
-import Box from "@mui/material/Box"; // Add this import
+import Box from "@mui/material/Box";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
+import Button from "@mui/material/Button";
 import useInfinite from "../hooks/useInfinite";
-import { useState, useRef } from "react";
-import { Button } from "@mui/material";
+import { keyframes } from "@mui/system";
 const CardComponent = ({ loading, cardData, saveDates }) => {
   const { title, url, explanation, date, media_type } = cardData || {};
   const [isExpanded, setIsExpanded] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const [animating, setAnimating] = useState(false);
   const wordLimit = 15;
+  const likeAnimation = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
 
   function formatDate(inputDate) {
     if (!inputDate) return "";
@@ -36,6 +50,12 @@ const CardComponent = ({ loading, cardData, saveDates }) => {
       return words.slice(0, wordLimit).join(" ") + "...";
     }
     return text;
+  };
+
+  const handleLike = () => {
+    setAnimating(true);
+    setLiked((prev) => !prev);
+    setTimeout(() => setAnimating(false), 300); // Duration of the animation
   };
 
   return (
@@ -107,9 +127,19 @@ const CardComponent = ({ loading, cardData, saveDates }) => {
         )}
       </Box>
       <CardActions disableSpacing sx={{ pb: 0 }}>
-        <IconButton aria-label="add to favorites">
-          <FavoriteBorderOutlinedIcon />
-        </IconButton>
+      <IconButton
+  aria-label="add to favorites"
+  onClick={handleLike}
+  sx={{
+    animation: liked ? `${likeAnimation} 0.3s ease-in-out` : "none",
+  }}
+>
+  {liked ? (
+    <FavoriteIcon sx={{ color: "red" }} />
+  ) : (
+    <FavoriteBorderOutlinedIcon />
+  )}
+</IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
@@ -119,14 +149,14 @@ const CardComponent = ({ loading, cardData, saveDates }) => {
       </CardActions>
       <CardContent sx={{ pt: 1, pb: 2 }}>
         {loading ? (
-          <React.Fragment>
+          <>
             <Skeleton
               animation="wave"
               height={15}
               style={{ marginBottom: 6 }}
             />
             <Skeleton animation="wave" height={15} width="80%" />
-          </React.Fragment>
+          </>
         ) : (
           <>
             <Typography
@@ -177,7 +207,7 @@ export const Cardcon = () => {
     const storedDates = localStorage.getItem("test");
     return storedDates ? JSON.parse(storedDates) : [];
   });
-  
+
   const saveDates = useCallback((prop) => {
     setDates((prevDates) => {
       const newDates = [...prevDates, prop];
@@ -185,7 +215,7 @@ export const Cardcon = () => {
       return newDates;
     });
   }, []);
-  
+
   useEffect(() => {
     localStorage.setItem("test", JSON.stringify(dates));
     console.log(JSON.parse(localStorage.getItem("test")));
@@ -203,18 +233,16 @@ export const Cardcon = () => {
       }}
     >
       {isLoading && !cards.length ? (
-        // Display initial loading skeletons
         Array(5).fill().map((_, index) => (
           <CardComponent key={`initial-skeleton-${index}`} loading />
         ))
       ) : (
-        // Display loaded cards
         cards.map((card, index) => (
           <CardComponent key={index} cardData={card} saveDates={saveDates} />
         ))
       )}
       {isFetchingMore &&
-        Array(3).fill().map((_, index) => (
+        Array(5).fill().map((_, index) => (
           <CardComponent key={`more-skeleton-${index}`} loading />
         ))}
       <div ref={loaderRef}></div>

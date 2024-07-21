@@ -1,45 +1,70 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import theme from './components/theme.js'; // Make sure to create this file as shown in the previous message
+import React, { useState, useMemo } from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import createTheme from './components/theme';
+import { useDarkMode } from './hooks/useDarkMode';
 import { Header } from "./components/header";
 import { Cardcon } from "./components/card";
 import Explore from "./components/explore";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Error from "./components/error";
-import { useInfinite } from "./hooks/useInfinite";
-import { Outlet } from "react-router-dom";
 import Saved from "./components/saved";
 import News from "./components/news";
-import Newsfooter from "./components/news-footer";
 import Articles from "./components/Articles.js";
 import Forecast from "./components/forecast";
 import Rssfeed from "./components/rss.js";
- 
+import { Outlet } from "react-router-dom";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import createTheme from './components/theme';
+import { useDarkMode } from './hooks/useDarkMode';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/poppins/200.css';
+import '@fontsource/poppins/400.css';
+import '@fontsource/cookie/400.css';
 
+const App = () => {
+  const [mode, toggleMode] = useDarkMode();
+  const theme = useMemo(() => createTheme(mode), [mode]);
 
-const MainApplayout = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <RouterProvider router={appRouter(toggleMode)} />
+    </ThemeProvider>
+  );
+};
+
+const MainAppLayout = ({ toggleMode }) => {
   return (
     <>
-       <Header /> 
+      <Header toggleMode={toggleMode} />
       <Outlet />
-      {/* <div className="center"><Cardcon/></div> */}
-
-      {/* <div className="center">  <Cardcon/></div> */}
     </>
   );
 };
- 
 
-const appRouter = createBrowserRouter([
+const appRouter = (toggleMode) => createBrowserRouter([
   {
     path: "/",
-    element: <MainApplayout  />,
+    element: <MainAppLayout toggleMode={toggleMode} />,
     errorElement: <Error />,
     children: [
       {
         path: "/",
-        element: <div className="center"><Cardcon/></div>,
+        element: <div className="center" style={{marginTop:"20px"}}><Cardcon/></div>,
       },
-     
       {
         path: "/explore",
         element: <Explore />,
@@ -54,7 +79,6 @@ const appRouter = createBrowserRouter([
         children:[
           {
             path: "/news",
-            
             element: <Rssfeed/>,
           },
           {
@@ -66,12 +90,12 @@ const appRouter = createBrowserRouter([
             element: <Forecast/>,
           },
         ]
-         
       },
-       
     ],
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={appRouter} />);
+root.render(<App />);
+
+export default App;
