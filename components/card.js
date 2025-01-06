@@ -176,9 +176,9 @@ const CardComponent = ({ loading, cardData, saveDates }) => {
             <FavoriteBorderOutlinedIcon />
           )}
         </IconButton>
-        // <IconButton aria-label="share">
-        //   <ShareIcon />
-        // </IconButton>
+        {/* <IconButton aria-label="share">
+          <ShareIcon />
+        </IconButton> */}
         <IconButton aria-label="save" onClick={() => saveDates(date)}>
           <TurnedInNotIcon />
         </IconButton>
