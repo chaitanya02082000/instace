@@ -66,22 +66,18 @@ const CardComponent = ({ loading, cardData, saveDates }) => {
     if (media_type === 'image' && url && !downloading) {
       setDownloading(true);
       try {
-        // Fetch the image using a proxy or directly
-        const response = await fetch(url);
+        // Use proxy service to bypass CORS
+        const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
+        const response = await fetch(proxyUrl);
         const blob = await response.blob();
         
-        // Create a blob URL
+        // Create blob URL and trigger download
         const blobUrl = window.URL.createObjectURL(blob);
-        
-        // Create filename from title and date
         const filename = `${title || 'nasa-image'}-${date || 'unknown'}.jpg`;
         
-        // Create temporary link element
         const link = document.createElement('a');
         link.href = blobUrl;
         link.download = filename;
-        
-        // Trigger download
         document.body.appendChild(link);
         link.click();
         
@@ -91,25 +87,8 @@ const CardComponent = ({ loading, cardData, saveDates }) => {
         
       } catch (error) {
         console.error('Download failed:', error);
-        // Fallback to proxy service if direct download fails
-        const proxyUrl = `https://cors-anywhere.herokuapp.com/${url}`;
-        try {
-          const proxyResponse = await fetch(proxyUrl);
-          const blob = await proxyResponse.blob();
-          const blobUrl = window.URL.createObjectURL(blob);
-          const filename = `${title || 'nasa-image'}-${date || 'unknown'}.jpg`;
-          
-          const link = document.createElement('a');
-          link.href = blobUrl;
-          link.download = filename;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(blobUrl);
-        } catch (proxyError) {
-          console.error('Proxy download failed:', proxyError);
-          window.open(url, '_blank');
-        }
+        // If proxy fails, try direct download in new tab
+        window.open(url, '_blank');
       } finally {
         setDownloading(false);
       }
