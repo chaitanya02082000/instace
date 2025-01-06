@@ -16,12 +16,16 @@ import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import Button from "@mui/material/Button";
 import useInfinite from "../hooks/useInfinite";
 import { keyframes } from "@mui/system";
+import DownloadIcon from '@mui/icons-material/Download';
+import CircularProgress from '@mui/material/CircularProgress';
 const CardComponent = ({ loading, cardData, saveDates }) => {
   const { title, url, explanation, date, media_type } = cardData || {};
   const [isExpanded, setIsExpanded] = useState(false);
   const [liked, setLiked] = useState(false);
   const [animating, setAnimating] = useState(false);
   const wordLimit = 15;
+  const [downloading, setDownloading] = useState(false);
+
   const likeAnimation = keyframes`
   0% {
     transform: scale(1);
@@ -57,7 +61,60 @@ const CardComponent = ({ loading, cardData, saveDates }) => {
     setLiked((prev) => !prev);
     setTimeout(() => setAnimating(false), 300); // Duration of the animation
   };
-
+  
+  const handleDownload = async () => {
+    if (media_type === 'image' && url && !downloading) {
+      setDownloading(true);
+      try {
+        // Fetch the image using a proxy or directly
+        const response = await fetch(url);
+        const blob = await response.blob();
+        
+        // Create a blob URL
+        const blobUrl = window.URL.createObjectURL(blob);
+        
+        // Create filename from title and date
+        const filename = `${title || 'nasa-image'}-${date || 'unknown'}.jpg`;
+        
+        // Create temporary link element
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = filename;
+        
+        // Trigger download
+        document.body.appendChild(link);
+        link.click();
+        
+        // Cleanup
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(blobUrl);
+        
+      } catch (error) {
+        console.error('Download failed:', error);
+        // Fallback to proxy service if direct download fails
+        const proxyUrl = `https://cors-anywhere.herokuapp.com/${url}`;
+        try {
+          const proxyResponse = await fetch(proxyUrl);
+          const blob = await proxyResponse.blob();
+          const blobUrl = window.URL.createObjectURL(blob);
+          const filename = `${title || 'nasa-image'}-${date || 'unknown'}.jpg`;
+          
+          const link = document.createElement('a');
+          link.href = blobUrl;
+          link.download = filename;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(blobUrl);
+        } catch (proxyError) {
+          console.error('Proxy download failed:', proxyError);
+          window.open(url, '_blank');
+        }
+      } finally {
+        setDownloading(false);
+      }
+    }
+  };
   return (
     <Card
       sx={{
@@ -127,26 +184,55 @@ const CardComponent = ({ loading, cardData, saveDates }) => {
         )}
       </Box>
       <CardActions disableSpacing sx={{ pb: 0 }}>
-      <IconButton
-  aria-label="add to favorites"
-  onClick={handleLike}
-  sx={{
-    animation: liked ? `${likeAnimation} 0.3s ease-in-out` : "none",
-  }}
->
-  {liked ? (
-    <FavoriteIcon sx={{ color: "red" }} />
-  ) : (
-    <FavoriteBorderOutlinedIcon />
-  )}
-</IconButton>
+        <IconButton
+          aria-label="add to favorites"
+          onClick={handleLike}
+          sx={{
+            animation: liked ? `${likeAnimation} 0.3s ease-in-out` : "none",
+          }}
+        >
+          {liked ? (
+            <FavoriteIcon sx={{ color: "red" }} />
+          ) : (
+            <FavoriteBorderOutlinedIcon />
+          )}
+        </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
         <IconButton aria-label="save" onClick={() => saveDates(date)}>
           <TurnedInNotIcon />
         </IconButton>
+        {media_type === 'image' && (
+          <IconButton 
+            aria-label="download" 
+            onClick={handleDownload}
+            disabled={downloading}
+            sx={{
+              '&:hover': {
+                color: 'primary.main',
+              },
+              position: 'relative',
+            }}
+          >
+            {downloading ? (
+              <CircularProgress
+                size={24}
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  marginTop: '-12px',
+                  marginLeft: '-12px',
+                }}
+              />
+            ) : (
+              <DownloadIcon />
+            )}
+          </IconButton>
+        )}
       </CardActions>
+      
       <CardContent sx={{ pt: 1, pb: 2 }}>
         {loading ? (
           <>
