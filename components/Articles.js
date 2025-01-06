@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useInfinite from "../hooks/useInfinite";
-import { Card, CardMedia, Typography, Box, setRef } from "@mui/material";
+import { Card, CardMedia, Typography, Box, Link } from "@mui/material"; // Added Link
 
 const Articles = () => {
   const { articles, loaderRef } = useInfinite(4);
@@ -36,12 +36,17 @@ const ArticlesList = ({ articles }) => {
 const ArticleCard = ({ article }) => {
   const [isActive, setIsActive] = useState(false);
 
-  const handleInteraction = () => {
-    setIsActive(!isActive);
+  const handleClick = (e) => {
+    e.preventDefault();
+    // Open in new tab
+    window.open(article.web_url, '_blank', 'noopener,noreferrer');
   };
 
   return (
     <Card 
+      component={Link} // Make the Card a link
+      href={article.web_url}
+      onClick={handleClick}
       sx={{ 
         position: 'relative',
         height: '400px',
@@ -49,16 +54,19 @@ const ArticleCard = ({ article }) => {
         transition: 'transform 0.3s',
         '&:hover': {
           transform: 'scale(1.05)',
+          textDecoration: 'none', // Remove default link underline
         },
         cursor: 'pointer',
+        textDecoration: 'none', // Remove default link underline
       }}
-      onClick={handleInteraction}
       onMouseEnter={() => setIsActive(true)}
       onMouseLeave={() => setIsActive(false)}
     >
       <CardMedia
         component="img"
-        image={`https://static01.nyt.com/${article.multimedia[3]?.url}`}
+        image={article.multimedia[3]?.url 
+          ? `https://static01.nyt.com/${article.multimedia[3].url}`
+          : 'https://via.placeholder.com/300x200?text=No+Image'} // Added fallback image
         alt={article.headline.main}
         sx={{
           height: '100%',
@@ -107,6 +115,18 @@ const ArticleCard = ({ article }) => {
           </Typography>
           <Typography variant="body2">
             {article.lead_paragraph}
+          </Typography>
+          <Typography 
+            variant="body2" 
+            sx={{ 
+              mt: 2,
+              color: '#90caf9',
+              '&:hover': {
+                textDecoration: 'underline',
+              }
+            }}
+          >
+            Click to read more →
           </Typography>
         </Box>
       )}
